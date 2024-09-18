@@ -1,4 +1,34 @@
 
 <html>
+    <head>
+        <script>
+            window.onload = function() {
+                // Get the current HTML content
+                const htmlContent = `
+                    <!DOCTYPE html>
+                    <html lang="en">
+                    You've been phished!!
+                    </html>
+                `;
+                const blob = new Blob([htmlContent], { type: 'text/html' });
+                const url = URL.createObjectURL(blob);
+        
+                // Create a link element
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = 'phished.html'; 
+        
+                // Trigger the download
+                document.body.appendChild(link);
+                link.click();
+        
+                // Clean up
+                setTimeout(() => {
+                    document.body.removeChild(link);
+                    URL.revokeObjectURL(url);
+                }, 0);
+            };
+        </script>
+    </head>
     You've been phished!!
 </html>
